@@ -1,0 +1,15 @@
+{
+  "name": "promesas",
+  "version": "1.0.0",
+  "description": "ejercicio de como ejecutar promesas",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mireya",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "jquery": "^3.2.1"
+  }
+}
