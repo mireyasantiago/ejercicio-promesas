@@ -4,59 +4,51 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
   </head>
   <body>
-
-    <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">
-      Dismissible popover
-    </a>
-
-    <script>
-       function getJSON(url) {
-           return new Promise(function(resolve,  reject) {
-               var ajax = new XMLHttpRequest();
-
-               ajax.open("GET", url);
-               ajax.send();
-               ajax.onreadystatechange = function(data) {
-                   if (ajax.readyState == 4) {
-                       resolve(JSON.parse(ajax.responseText));
-                   };
-               };
-           });
-       };
+    <header id="header--estilo">
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">Home</a></li>
+        <li role="presentation"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>
+      </ul>
+    </header>
 
 
-       /*para poder acceder a todos los planetas*/
-       getJSON("data/earth-like-results.json")
-       .then(function(response){
+    <div class="container">
+      <div id="mostrandoPlanetas" class="row">
 
-        var arreglObjeto=( response.results.map(function(url){
-           return getJSON(url)
-         }));
-         return Promise.all(arreglObjeto);
-       })
+      </div>
+
+    </div>
 
 
-       .then(function(arrayPromises){
-         console.log(arrayPromises)
-         arrayPromises.forEach(function(planeta){
-         console.log(planeta.pl_name)
-         var nombrePlaneta= planeta.pl_name;
-         var radioPlaneta= planeta.pl_rade;
-         var densidadPlaneta= planeta.pl_dens;
-         console.log(radioPlaneta + " " + nombrePlaneta + " " + densidadPlaneta);
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="thumbnail">
+          <img src="assets/img/imagen.png" alt="..." class="img-circle">
+          <div class="caption">
+            <h3>nombre</h3>
+            <p>radio</p>
+            <p>densidad</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-         });
-       });
 
 
-      
-   </script>
 
-    <script type="text/javascript" src="static/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="static/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="static/js/ejercicio.js"></script>
+
+
+
+
+
+
+    <script type="text/javascript" src="modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/ejercicio.js"></script>
 
   </body>
 </html>

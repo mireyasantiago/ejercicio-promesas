@@ -1,8 +1,7 @@
-
 function getJSON(url) {
     return new Promise(function(resolve,  reject) {
         var ajax = new XMLHttpRequest();
-        var url = "data/earth-like-results.json";
+
         ajax.open("GET", url);
         ajax.send();
         ajax.onreadystatechange = function(data) {
@@ -16,11 +15,61 @@ function getJSON(url) {
 
 /*para poder acceder a todos los planetas*/
 getJSON("data/earth-like-results.json")
-.then(function(mensaje){
-  mensaje.results.forEach(function(resultadoFinal){
-    getJSON(resultadoFinal).then(function(planetas){console.log(planetas)});
-  });
+.then(function(response){
+
+ var arreglObjeto=( response.results.map(function(url){
+    return getJSON(url)
+  }));
+  return Promise.all(arreglObjeto);
 })
+
+.then(function(arrayPromises){
+  console.log(arrayPromises)
+  arrayPromises.forEach(function(planeta){
+  console.log(planeta.pl_name)
+  var nombre= planeta.pl_name;
+  var radio= planeta.pl_rade;
+  var densidad= planeta.pl_dens;
+ console.log(radio + " " + nombre + " " + densidad);
+
+
+  mostrarTotalPlanetas({
+    nombre: nombre,
+    radio: radio,
+    densidad: densidad
+  });
+
+
+  });
+});
+
+
+var plantilla=
+'<div class="col-md-offset-3 col-md-6">' +
+  '<div class="thumbnail">' +
+    '<img src="assets/img/imagen.png" alt="#" class="img-circle">' +
+    '<div class="caption">' +
+      '<h3>__nombre__</h3>' +
+      '<p>__radio__</p>' +
+      '<p>__densidad__</p>' +
+    '</div>' +
+  '</div>' +
+'</div>' ;
+
+
+/*nombre del contenedor*/
+var contenedorPlanetas= document.getElementById('mostrandoPlanetas');
+
+var mostrarTotalPlanetas= function(datos){
+
+  var plantilaFinal= " ";
+
+    plantillaFinal += replace("__nombre__", datos.nombre)
+    .replace("__radio__", datos.radio)
+    .replace("__densidad__", datos.densidad)
+    contenedorPlanetas.innerHTML(plantillaFinal);
+
+};
 
 
 
