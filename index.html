@@ -15,7 +15,7 @@
        function getJSON(url) {
            return new Promise(function(resolve,  reject) {
                var ajax = new XMLHttpRequest();
-               var url = "data/earth-like-results.json";
+
                ajax.open("GET", url);
                ajax.send();
                ajax.onreadystatechange = function(data) {
@@ -29,19 +29,29 @@
 
        /*para poder acceder a todos los planetas*/
        getJSON("data/earth-like-results.json")
-       .then(function(mensaje){
-         mensaje.results.forEach(function(resultadoFinal){
-           getJSON(resultadoFinal).then(function(planetas){console.log(planetas)});
-         });
+       .then(function(response){
+
+        var arreglObjeto=( response.results.map(function(url){
+           return getJSON(url)
+         }));
+         return Promise.all(arreglObjeto);
        })
 
 
+       .then(function(arrayPromises){
+         console.log(arrayPromises)
+         arrayPromises.forEach(function(planeta){
+         console.log(planeta.pl_name)
+         var nombrePlaneta= planeta.pl_name;
+         var radioPlaneta= planeta.pl_rade;
+         var densidadPlaneta= planeta.pl_dens;
+         console.log(radioPlaneta + " " + nombrePlaneta + " " + densidadPlaneta);
 
-       /*para acceder a un planeta en especifico
-       getJSON("data/earth-like-results.json")
-       .then(function(mensaje){return(getJSON(mensaje.results[0]))})
-       .then(function(resultado){console.log(resultado)})*/
+         });
+       });
 
+
+      
    </script>
 
     <script type="text/javascript" src="static/jquery/dist/jquery.min.js"></script>
