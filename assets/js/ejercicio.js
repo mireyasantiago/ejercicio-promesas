@@ -61,11 +61,6 @@ getJSON("data/earth-like-results.json")
 })
 
 
-
-
-
-
-
 .then(function(arrayPromises){
   //console.log(arrayPromises)
   /*nombre del contenedor*/
@@ -73,19 +68,23 @@ getJSON("data/earth-like-results.json")
   var plantillaFinal= " ";
   arrayPromises.forEach(function(planeta){
   //console.log(planeta.pl_name)
+  /*
+  var imagen= imagenPlaneta.map(function(obj){
+    return imagenPlaneta[0];
+  });
+  var imagenes= imagenPlaneta.resultado.map(function(obj){
+    return obj.imagen[0];
+  });
+  console.log(imagenes);
+  */
 
-// console.log(imagenPlaneta)
+
+  // console.log(imagenPlaneta)
   var nombre= planeta.pl_name;
   var radio= planeta.pl_rade;
   var densidad= planeta.pl_dens;
 
-
-
-
   //console.log(radio + " " + nombre + " " + densidad);
-
-
-
 plantillaFinal += plantilla.replace("__nombre__",nombre)
  .replace("__radio__",radio)
  //.replace("__imagen__", imagenPlaneta)
@@ -97,15 +96,6 @@ plantillaFinal += plantilla.replace("__nombre__",nombre)
   });
 });
 
-/*
-var imagen= imagenPlaneta.map(function(obj){
-  return imagenPlaneta[0];
-});
-var imagenes= imagenPlaneta.resultado.map(function(obj){
-  return obj.imagen[0];
-});
-console.log(imagenes);
-*/
 
 
 
